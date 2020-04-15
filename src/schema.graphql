@@ -1,3 +1,20 @@
 type Query {
   hello: String
+  article(id: ID): Article
+  user(id: ID): User
+  articles(searchText: String): [Article]
+  users(limit: Int): [User]
+}
+
+type Article {
+  id: ID!
+  title: String
+  body: String
+  author: User
+}
+type User {
+  id: ID!
+  name: String
+  email: String
+  articles: [Article]
 }
