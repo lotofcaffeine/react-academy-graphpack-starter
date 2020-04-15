@@ -2,7 +2,7 @@ type Query {
   hello: String
   article(id: ID): Article
   user(id: ID): User
-  articles(searchText: String): [Article]
+  articles(search: SearchInput): [Article!]!
   users(limit: Int): [User]
 }
 
@@ -11,10 +11,21 @@ type Article {
   title: String
   body: String
   author: User
+  isPublished: Boolean
+}
+
+input SearchInput {
+  text: String
+  published: Boolean
 }
 type User {
   id: ID!
   name: String
   email: String
-  articles: [Article]
+  articles(search: SearchInput): [Article!]!
+}
+
+type Mutation {
+  createUser(name: String!, email: String!): User!
+  publishArticle(id: ID): Article
 }
